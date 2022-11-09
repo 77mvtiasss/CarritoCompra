@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/listarProducto"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalle</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-content >
+    <ion-card *ngIf="productoActivo">
+      <ion-img [src]="productoActivo.foto"></ion-img>
+      <ion-card-header>
+        <ion-card-subtitle>{{ productoActivo.precio | currency:'CLP'}}</ion-card-subtitle>
+        <ion-card-title>{{productoActivo.nombre}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        {{productoActivo.detalle}}
+        <ion-chip [color]="productoActivo.stock<15?'danger':'primary'">
+          Cantidad restante {{productoActivo.stock}}
+        </ion-chip>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title> Detalle adicionales </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-card-subtitle color="dark">Color:</ion-card-subtitle>
+        <ion-label class="ion-text-wrap">
+          {{productoActivo?.color}}
+        </ion-label>
+         <hr>
+        <ion-card-subtitle color="dark"> Marca:</ion-card-subtitle>
+        <ion-label class="ion-text-wrap">
+          {{productoActivo?.marca}}
+        </ion-label>
+        <hr>
+        <ion-card-subtitle color="dark">Tipo de producto:</ion-card-subtitle>
+        <ion-label class="ion-text-wrap">
+          {{productoActivo?.tipoProducto}}
+        </ion-label>
+        <hr>
+        <ion-card-subtitle color="dark">Pais de Origen:</ion-card-subtitle>
+        <ion-label class="ion-text-wrap">
+          {{productoActivo?.paisOrigen}}
+        </ion-label>
+        <hr>
+        <ion-card-subtitle color="dark">Garantia:</ion-card-subtitle>
+        <ion-label class="ion-text-wrap">
+          {{productoActivo?.garantia}}
+        </ion-label>
+
+
+      </ion-card-content>
+    </ion-card>
+
+    <ion-button expand="block" (click)=" tieneProductoCart(productoActivo.nombre)">
+      Agregar
+     <ion-icon name="bag-add-outline" slot="end"></ion-icon>
+   </ion-button>
+
+
+
+</ion-content>
+

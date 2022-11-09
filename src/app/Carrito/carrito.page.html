@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center">Carrito</ion-title>
+    <ion-button [routerLink]="['/ListarProducto']" slot="start">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <ion-refresher slot="fixed" [pullFactor]="0.5" [pullMin]="100" [pullMax]="200" (ionRefresh)="handleRefresh($event)">
+   <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>-->
+
+  <ion-card *ngFor="let cart of carrito" color="secondary">
+    <ion-card-header>
+      <ion-card-subtitle>Producto id: {{cart.productoId}}</ion-card-subtitle>
+      <ion-card-title>Producto: {{cart.nombreProducto }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-label class="ion-text-wrap">
+        Total:{{cart.total | currency:'CLP'}}
+      </ion-label>
+      <hr />
+
+      <ion-label class="ion-text-wrap"> Cantidad:{{cart.cantidad}} </ion-label>
+    </ion-card-content>
+    <hr size="3px" color="dark" />
+    <div style="display: flex; justify-content: space-between">
+      <ion-col size="4">
+        <ion-button
+          fill="clear"
+          (click)=" sacarProducto(cart.nombreProducto,cart.idProducto,cart.total,cart.cantidad,cart.idUsuario,cart.id)"
+        >
+          <ion-icon name="remove-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="4">
+        <ion-button
+          fill="clear"
+          (click)=" agregarCart(cart.nombreProducto,cart.idProducto,cart.total,cart.cantidad,cart.idUsuario,cart.id)"
+        >
+          <ion-icon name="add-circle-outline"></ion-icon
+        ></ion-button>
+      </ion-col>
+    </div>
+  </ion-card>
+
+  <h2 style="justify-content: center">
+    Total a pagar: {{Total | currency:'CLP'}}
+  </h2>
+
+  <ion-button class="ion-padding" (click)=" cartEliminar()"
+    >Eliminar Carrito</ion-button
+  >
+</ion-content>

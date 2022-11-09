@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Registrar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="formulario" novalidate (ngSubmit)="guardarUsario()">
+    <ion-item>
+      <ion-label position="floating">Usario</ion-label>
+      <ion-input formControlName="nombre" type="text"></ion-input>
+      <ion-note slot="error"
+        *ngIf="campo('nombre').invalid && campo('nombre').errors && campo('nombre').errors.required && fueTocado('nombre')"
+      >Este campo es requerido</ion-note>
+      <ion-note slot="error"
+        *ngIf="campo('nombre').invalid && campo('nombre').errors && campo('nombre').errors.minlength && fueTocado('nombre')"
+      >El minimo son 5 caracteres</ion-note>
+      <ion-note slot="error"
+        *ngIf="campo('nombre').invalid && campo('nombre').errors && campo('nombre').errors.maxlength && fueTocado('nombre')"
+      >El maximo son 15 caracteres</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Contraseña </ion-label>
+      <ion-input formControlName="contraseña" type="password"></ion-input>
+      <ion-note slot="error"
+        *ngIf="campo('contraseña').invalid && campo('contraseña').errors && campo('contraseña').errors.required && fueTocado('contraseña')"
+      >Este campo es requerido</ion-note>
+      <ion-note slot="error"
+        *ngIf="campo('contraseña').invalid && campo('contraseña').errors && campo('contraseña').errors.minlength && fueTocado('contraseña')"
+      >El minimo son 5 caracteres</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Confirmar la contraseña </ion-label>
+      <ion-input formControlName="contraseña" type="password"></ion-input>
+      <ion-note slot="error"
+        *ngIf="campo('contraseña').invalid && campo('contraseña').errors && campo('contraseña').errors.required && fueTocado('contraseña')"
+      >Este campo es requerido</ion-note>
+      <ion-note slot="error"
+        *ngIf="campo('contraseña').invalid && campo('contraseña').errors && campo('contraseña').errors.minlength && fueTocado('contraseña')"
+      >El minimo son 5 caracteres</ion-note>
+    </ion-item>
+
+    <ion-button type="submit" role="submit" expand="block" [disabled]="formulario.invalid">Crear cuenta</ion-button>
+
+  </form>
+
+</ion-content>

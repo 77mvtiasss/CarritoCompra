@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>eliminar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="productoActivo">
+    <ion-img [src]="productoActivo.foto"></ion-img>
+    <ion-card-header>
+      <ion-card-title>{{productoActivo.nombre}}</ion-card-title>
+      <ion-card-subtitle>
+        <ion-label>{{ productoActivo.precio | currency:'CLP'}}</ion-label>
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-chip [color]="productoActivo.stock<15?'danger':'primary'">
+        Cantidad restante {{productoActivo.stock}}
+      </ion-chip>
+      <ion-item-divider></ion-item-divider>
+      {{productoActivo.detalle}}
+    </ion-card-content>
+    <ion-card-content style="display:flex; justify-content: space-between ;">
+      <ion-button [routerLink]="['/listarProduAdmin']" >Cancelar</ion-button>
+      <ion-button (click)="borrarProducto()" color="danger" >Eliminar</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

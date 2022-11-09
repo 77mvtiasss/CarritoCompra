@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-title class="ion-text-center">Productos </ion-title>
+
+    <ion-button [routerLink]="['/']" slot="end" color="primary" >
+      <ion-icon name="log-out-outline"></ion-icon>
+    </ion-button>
+    <ion-button  [routerLink]="['/carrito',idUSuario]" slot="start" color="primary"   >
+      <ion-icon  name="cart-sharp" ></ion-icon>
+    </ion-button>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Lista de productos -->
+  <ion-card *ngFor="let producto of listaProductos" [routerLink]="['/detalleProducto',producto.id]" >
+    <ion-img [src]="producto.foto" ></ion-img>
+    <ion-card-header>
+      <ion-card-title>{{producto.nombre}}</ion-card-title>
+      <ion-card-subtitle>
+        <ion-label>{{ producto.precio | currency:'CLP'}}</ion-label>
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item-divider></ion-item-divider>
+      {{producto.detalle}}
+    </ion-card-content>
+
+
+
+
+  </ion-card>
+
+<ion-infinite-scroll (ionInfinite)="cargarMasDatos()">
+    <ion-infinite-scroll-content loadingText="Cargando....">
+
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+
+</ion-content>

@@ -1,0 +1,117 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>agregar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="formulario" novalidate (ngSubmit)="guardarProducto()">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input formControlName="nombre" type="text"></ion-input>
+      <ion-note slot="error"
+        *ngIf="campo('nombre').invalid && campo('nombre').errors && campo('nombre').errors.required && fueTocado('nombre')"
+      >Este campo es requerido</ion-note>
+      <ion-note slot="error"
+        *ngIf="campo('nombre').invalid && campo('nombre').errors && campo('nombre').errors.minlength && fueTocado('nombre')"
+      >El minimo son 3 caracteres</ion-note>
+      <ion-note slot="error"
+        *ngIf="campo('nombre').invalid && campo('nombre').errors && campo('nombre').errors.maxlength && fueTocado('nombre')"
+      >El maximo son 25 caracteres</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label> Foto </ion-label>
+      <ion-input [disabled]="cargandoFoto" (change)="cargarFoto($event)" formControlName="foto" type="file" accept="*/png"></ion-input>
+      <ion-note slot="error"
+        *ngIf="campo('foto').invalid && campo('foto').errors && campo('foto').errors.required && fueTocado('foto')"
+      >Este campo es requerido</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Precio {{campo('precio').value}}</ion-label>
+      <ion-range formControlName="precio" min="0" max="100000" [pin]="true"></ion-range>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Stock</ion-label>
+      <ion-input type="number" formControlName="stock"></ion-input>
+      <ion-note slot="error"
+        *ngIf="campo('stock').invalid && campo('stock').errors && campo('stock').errors.required && fueTocado('stock')"
+      >Este campo es requerido</ion-note>
+      <ion-note slot="error"
+        *ngIf="campo('stock').invalid && campo('stock').errors && campo('stock').errors.min && fueTocado('stock')"
+      >El valor minimo es 1</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Detalle</ion-label>
+      <ion-textarea formControlName="detalle"></ion-textarea>
+      <ion-note slot="error"
+        *ngIf="campo('detalle').invalid && campo('detalle').errors && campo('detalle').errors.required && fueTocado('detalle')"
+      >Este campo es requerido</ion-note>
+      <ion-note slot="error"
+        *ngIf="campo('detalle').invalid && campo('detalle').errors && campo('detalle').errors.minlength && fueTocado('detalle')"
+      >El minimo son 25 caracteres</ion-note>
+
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating"> Tipo de Producto </ion-label>
+      <ion-input formControlName="tipoProducto" type="text"></ion-input>
+      <ion-note slot="error"
+        *ngIf="campo('tipoProducto').invalid && campo('tipoProducto').errors && campo('tipoProducto').errors.required && fueTocado('tipoProducto')"
+      >Este campo es requerido</ion-note>
+      <ion-note slot="error"
+        *ngIf="campo('tipoProducto').invalid && campo('tipoProducto').errors && campo('tipoProducto').errors.minlength && fueTocado('tipoProducto')"
+      >El minimo son 5 caracteres</ion-note>
+
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" > Pais Origen </ion-label>
+      <ion-input formControlName="paisOrigen" type="text"></ion-input>
+      <ion-note slot="error"
+        *ngIf="campo('paisOrigen').invalid && campo('paisOrigen').errors && campo('paisOrigen').errors.required && fueTocado('paisOrigen')"
+      >Este campo es requerido</ion-note>
+      <ion-note slot="error"
+      *ngIf="campo('tipoProducto').invalid && campo('tipoProducto').errors && campo('tipoProducto').errors.minlength && fueTocado('tipoProducto')"
+    >El minimo son 4 caracteres</ion-note>
+
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating"> Marca </ion-label>
+      <ion-input formControlName="marca" type="text"></ion-input>
+      <ion-note slot="error"
+        *ngIf="campo('marca').invalid && campo('marca').errors && campo('marca').errors.required && fueTocado('marca')"
+      >Este campo es requerido</ion-note>
+      <ion-note slot="error"
+        *ngIf="campo('tipoProducto').invalid && campo('tipoProducto').errors && campo('tipoProducto').errors.minlength && fueTocado('tipoProducto')"
+      >El minimo son 2  caracteres</ion-note>
+
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating"> Color </ion-label>
+      <ion-input formControlName="color" type="text"></ion-input>
+      <ion-note slot="error"
+        *ngIf="campo('color').invalid && campo('color').errors && campo('color').errors.required && fueTocado('color')"
+      >Este campo es requerido</ion-note>
+      <ion-note slot="error"
+        *ngIf="campo('tipoProducto').invalid && campo('tipoProducto').errors && campo('tipoProducto').errors.minlength && fueTocado('tipoProducto')"
+      >El minimo son 4 caracteres</ion-note>
+
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating"> Garantia </ion-label>
+      <ion-input formControlName="garantia" type="text"></ion-input>
+      <ion-note slot="error"
+        *ngIf="campo('garantia').invalid && campo('garantia').errors && campo('garantia').errors.required && fueTocado('garantia')"
+      >Este campo es requerido</ion-note>
+      <ion-note slot="error"
+      *ngIf="campo('tipoProducto').invalid && campo('tipoProducto').errors && campo('tipoProducto').errors.minlength && fueTocado('tipoProducto')"
+    >El minimo son 5  caracteres</ion-note>
+
+    </ion-item>
+    <ion-item>
+      <ion-button [disabled]="formulario.invalid && !cargandoFoto" role="submit" type="submit">Guardar!!</ion-button>
+    </ion-item>
+  </form>
+</ion-content>
